@@ -10,11 +10,10 @@ import {
 import { formatCurrency } from "./utils";
 
 // ✅ Neon connection
-const sql = neon(`${process.env.DATABASE_URL}`);
+export const sql = neon(`${process.env.DATABASE_URL}`);
 
 export async function fetchRevenue() {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
     const data = (await sql`SELECT * FROM revenue`) as Revenue[];
     return data;
   } catch (error) {
