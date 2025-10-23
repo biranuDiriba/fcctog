@@ -4,6 +4,8 @@ import { SignupFormSchema, FormState } from "@/app/lib/definitions";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 import { connectedToMongodb } from "../database/mongoose";
+import { createSession } from "../utils/session";
+import { redirect } from "next/navigation";
 export async function signup(state: FormState, formData: FormData) {
   console.log("coming here and it is fine");
   // Validate form fields
@@ -24,5 +26,8 @@ export async function signup(state: FormState, formData: FormData) {
   const hashedPassword = await bcrypt.hash(password, 10);
   await connectedToMongodb();
   const user = await User.create({ name, email, password: hashedPassword });
-  if (user) console.log(user);
+
+  await createSession(user.id);
+  // 5. Redirect user
+  redirect("/dashboard");
 }
