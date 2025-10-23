@@ -29,5 +29,6 @@ export async function signup(state: FormState, formData: FormData) {
 
   await createSession(user.id);
   // 5. Redirect user
+  console.log("added for redirecting");
   redirect("/dashboard");
 }
