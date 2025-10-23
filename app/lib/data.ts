@@ -9,7 +9,6 @@ import {
 } from "./definitions";
 import { formatCurrency } from "./utils";
 
-// ✅ Neon connection
 export const sql = neon(`${process.env.DATABASE_URL}`);
 
 export async function fetchRevenue() {
