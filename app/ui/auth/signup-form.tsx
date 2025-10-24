@@ -1,11 +1,15 @@
 "use client";
 
 import { signup } from "@/app/lib/actions/auth";
+import { FormState } from "@/app/lib/definitions";
+import asyncMiddleware from "@/app/lib/middlewares/asyncMiddleware";
 import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
 
 export default function SignupForm() {
-  const [state, action, pending] = useActionState(signup, undefined);
+  const [state, action, pending] = useActionState<FormState>(
+    asyncMiddleware(signup),
+    undefined
+  );
 
   return (
     <form action={action}>
