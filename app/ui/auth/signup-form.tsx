@@ -67,9 +67,10 @@ import { Divider } from "../components/elements/Divider";
 // }
 
 export default function SignupForm() {
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.Client_Id}&redirect_uri=http://localhost:3000/api/auth/google&response_type=code&scope=openid%20email%20profile`;
   return (
-    <div className="mt-4 flex grow flex-col gap-4 md:flex-row justify-center">
-      <div className="flex   flex-col justify-center gap-6 rounded-lg  px-6 py-10 md:w-2/5 md:px-20">
+    <div className="my-4 flex grow flex-col gap-4 md:flex-row justify-center  bg-red-400">
+      <div className="flex  bg-blue-400  flex-col justify-center gap-6 rounded-lg  px-6 py-10 md:w-2/5 md:px-20">
         <Text
           className={` ${lusitana.className} text-xl text-blue-500 md:text-3xl md:leading-normal uppercase`}
         >
@@ -77,7 +78,7 @@ export default function SignupForm() {
         </Text>
 
         <Link
-          href="/signup"
+          href="/signin"
           className="flex items-center gap-1 self-start  flex-wrap"
         >
           <span> Don’t have an account? </span>
@@ -88,7 +89,7 @@ export default function SignupForm() {
         </Link>
       </div>
 
-      <form className="space-y-3">
+      {/* <form className="space-y-3 bg-blue-700">
         <div className=" rounded-lg bg-gray-200 px-6 pb-4 pt-8">
           <h1 className={`${lusitana.className} mb-3 text-2xl`}>
             Create new account
@@ -135,13 +136,19 @@ export default function SignupForm() {
             </div>
           </div>
           <Button className="mt-4 w-full">Log in</Button>
-          <div className="flex h-8 items-end space-x-1">
-            {/* Add form errors here */}
-          </div>
+          <div className="flex h-8 items-end space-x-1"></div>
           <Divider />
           <Button className="mt-4 w-full">Continue with Google</Button>
         </div>
-      </form>
+      
+      </form> */}
+      <div className="flex items-center justify-center h-screen">
+        <a href={googleAuthUrl}>
+          <button className="bg-white text-black px-6 py-3 rounded shadow hover:bg-gray-100">
+            Continue with Google
+          </button>
+        </a>
+      </div>
     </div>
   );
 }
