@@ -5,11 +5,23 @@ import { cookies } from "next/headers";
 const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 
-export async function encrypt(payload: any) {
+// export async function encrypt(payload: any) {
+//   return new SignJWT(payload)
+//     .setProtectedHeader({ alg: "HS256" })
+//     .setIssuedAt()
+//     .setExpirationTime("7d")
+//     .sign(encodedKey);
+// }
+export async function encrypt(
+  payload: any,
+  secretKey: string | any,
+  expiresIn: any
+) {
+  const encodedKey = new TextEncoder().encode(secretKey);
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime(expiresIn)
     .sign(encodedKey);
 }
 
